@@ -5,8 +5,7 @@
         "Monolog",
         "Handler",
         "ZeroMQ",
-        "ZMQ",
-        "ØMQ"
+        "ZMQ"
     ],
     "license" : "MIT",
     "authors" : [

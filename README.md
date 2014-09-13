@@ -1,4 +1,4 @@
-#MonologZMQHandler (v0.1.4)
+#MonologZMQHandler (v0.1.5)
 This package lets u send your Monolog logs over a ZeroMQ (ØMQ) socket.
 
 [![Build Status](https://api.travis-ci.org/websoftwares/MonologZMQHandler.png)](https://travis-ci.org/websoftwares/MonologZMQHandler)
@@ -54,7 +54,7 @@ $handler = new ZMQHandler($publisher, \ZMQ::MODE_SNDMORE);
 
 // Create new logger instance
 $log = new Logger('channelName');
-$log->pushHandler($handler));
+$log->pushHandler($handler);
 
 // Log something
 $log->addWarning("Something is going wrong...");

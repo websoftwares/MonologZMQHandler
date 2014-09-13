@@ -1,4 +1,4 @@
-#MonologZMQHandler (v0.1.6)
+#MonologZMQHandler (v0.1.7)
 This package lets u send your Monolog logs over a ZeroMQ (ØMQ) socket.
 
 [![Build Status](https://api.travis-ci.org/websoftwares/MonologZMQHandler.png)](https://travis-ci.org/websoftwares/MonologZMQHandler)
@@ -25,7 +25,7 @@ Create a composer.json file in your project root:
 ```php
 {
     "require": {
-        "websoftwares/MonologZMQHandler": "dev-master"
+		"websoftwares/monolog-zmq-handler": "dev-master"
     }
 }
 ```

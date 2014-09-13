@@ -1,4 +1,4 @@
-#MonologZMQHandler (v0.1.5)
+#MonologZMQHandler (v0.1.6)
 This package lets u send your Monolog logs over a ZeroMQ (ØMQ) socket.
 
 [![Build Status](https://api.travis-ci.org/websoftwares/MonologZMQHandler.png)](https://travis-ci.org/websoftwares/MonologZMQHandler)
@@ -58,6 +58,20 @@ $log->pushHandler($handler);
 
 // Log something
 $log->addWarning("Something is going wrong...");
+```
+## Examples
+in the examples/ folder u can find some basic examples for PUB/SUB and PUSH/PULL
+
+PUB/SUB
+```
+php publisher.php
+php subscriber.php
+```
+
+PUSH/PULL
+```
+php pusher.php
+php puller.php
 ```
 
 ## Testing

@@ -1,0 +1,7 @@
+vendor/
+composer.lock
+coverage.txt
+composer.phar
+build/logs/clover.xml
+.coveralls.yml
+ocular.phar

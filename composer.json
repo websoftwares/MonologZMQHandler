@@ -1,0 +1,38 @@
+{
+    "name" : "websoftwares/MonologZMQHandler",
+    "description" : "Sends your logs over a ZeroMQ (ØMQ) socket.",
+    "keywords" : [
+        "Monolog",
+        "Handler",
+        "ZeroMQ",
+        "ZMQ",
+        "ØMQ"
+    ],
+    "license" : "MIT",
+    "authors" : [
+        {
+            "name": "Boris Verhaaff",
+            "email": "boris@websoftwar.es",
+            "role" : "Developer"
+        }
+    ],
+    "require" : {
+        "php": ">=5.4.0",
+        "monolog/monolog": "~1.10",
+        "ext-zmq": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.0",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Websoftwares\\Monolog\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Websoftwares\\Tests\\Monolog\\": "tests/"
+        }
+    }
+}

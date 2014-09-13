@@ -1,5 +1,5 @@
 {
-    "name" : "websoftwares/MonologZMQHandler",
+    "name" : "websoftwares/monolog-zmq-handler",
     "description" : "Sends your logs over a ZeroMQ (ØMQ) socket.",
     "keywords" : [
         "Monolog",

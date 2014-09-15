@@ -10,7 +10,7 @@ class ZMQHandlerTest extends \PHPUnit_Framework_TestCase
     public function testInstantiateAsObjectSucceeds()
     {
         $context = new \ZMQContext();
-        $publisher = $this->getMock("ZMQSocket", [], [$context, \ZMQ::SOCKET_PUSH]);
+        $publisher = $this->getMock("ZMQSocket", null, [$context, \ZMQ::SOCKET_PUSH]);
         $this->assertInstanceOf('Websoftwares\Monolog\Handler\ZMQHandler', new ZMQHandler($publisher));
     }
 
@@ -76,10 +76,10 @@ class ZMQHandlerTest extends \PHPUnit_Framework_TestCase
             'channel' => 'test',
             'extra' => [],
             ],
-           null
+           \ZMQ::MODE_SNDMORE
         ];
 
-        $handler = new ZMQHandler($publisher, \ZMQ::MODE_SNDMORE);
+        $handler = new ZMQHandler($publisher, \ZMQ::MODE_SNDMORE, true);
         $record = $this->getRecord(Logger::WARNING, 'test', ['data' => new \stdClass(), 'foo' => 34]);
         $handler->handle($record);
         $this->assertCount(2, $messages);
@@ -106,5 +106,15 @@ class ZMQHandlerTest extends \PHPUnit_Framework_TestCase
             'datetime' => \DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true))),
             'extra' => array(),
         );
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testInstantiateAsObjectFails()
+    {
+        $context = new \ZMQContext();
+        $publisher = $this->getMock("ZMQSocket", null, [$context, ]);
+        new ZMQHandler($publisher);
     }
 }

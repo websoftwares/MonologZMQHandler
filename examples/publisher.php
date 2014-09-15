@@ -9,7 +9,7 @@ try {
     $publisher = new \ZMQSocket($context, \ZMQ::SOCKET_PUB);
     $publisher->bind("tcp://127.0.0.1:5556");
 
-    $handler = new ZMQHandler($publisher, \ZMQ::MODE_SNDMORE); 
+    $handler = new ZMQHandler($publisher, \ZMQ::MODE_SNDMORE, true); 
 
     $log = new Logger('log-channel');
     $log->pushHandler($handler);

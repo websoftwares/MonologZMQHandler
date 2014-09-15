@@ -14,7 +14,6 @@ use Monolog\Handler\AbstractProcessingHandler;
 
 class ZMQHandler extends AbstractProcessingHandler
 {
-
     /**
      * @var \ZMQSocket
      */
@@ -27,19 +26,34 @@ class ZMQHandler extends AbstractProcessingHandler
     protected $zmqMode = \ZMQ::MODE_DONTWAIT;
 
     /**
-     * @param \zmqSocket $zmqSocket instance of \ZMQSocket
-     * @param int        $zmqMode   \ZMQ::MODE_SNDMORE // use this if u want to send multi-part with channel.
+     * @var boolean
+     */
+    protected $multipart = false;
+
+    /**
+     * @param \zmqSocket $zmqSocket instance of \ZMQSocket for now only the send types allowed
+     * @param int        $zmqMode   ZMQ mode
+     * @param boolean    $multipart send multipart message
      * @param int        $level
      * @param bool       $bubble    Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct(
         \zmqSocket $zmqSocket,
         $zmqMode = \ZMQ::MODE_DONTWAIT,
+        $multipart = false,
         $level = Logger::DEBUG,
         $bubble = true)
     {
+        $zmqSocketType = $zmqSocket->getSocketType();
+
+        // If u need the the Bi-directional types make a PR
+        if (! $zmqSocketType == \ZMQ::SOCKET_PUB || ! $zmqSocketType == \ZMQ::SOCKET_PUSH) {
+            throw new \Exception("Invalid socket type used, only PUB, PUSH allowed.");
+        }
+
         $this->zmqSocket = $zmqSocket;
         $this->zmqMode = $zmqMode;
+        $this->multipart = $multipart;
         parent::__construct($level, $bubble);
     }
 
@@ -48,12 +62,10 @@ class ZMQHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
-        if ($this->zmqMode == \ZMQ::MODE_SNDMORE) {
+        if ($this->multipart) {
             $this->zmqSocket->send($record['channel'],$this->zmqMode);
-            $this->zmqSocket->send($record["formatted"]);
-        } else {
-            $this->zmqSocket->send($record["formatted"],$this->zmqMode);
         }
+        $this->zmqSocket->send($record["formatted"],$this->zmqMode);
     }
 
     /**

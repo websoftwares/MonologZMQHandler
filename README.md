@@ -1,4 +1,4 @@
-#MonologZMQHandler (v0.2.1)
+#MonologZMQHandler (v0.2.2)
 This package lets u send your Monolog logs over a ZeroMQ (ØMQ) socket.
 
 [![Build Status](https://api.travis-ci.org/websoftwares/MonologZMQHandler.png)](https://travis-ci.org/websoftwares/MonologZMQHandler)

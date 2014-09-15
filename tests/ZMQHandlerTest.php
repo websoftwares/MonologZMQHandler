@@ -76,7 +76,7 @@ class ZMQHandlerTest extends \PHPUnit_Framework_TestCase
             'channel' => 'test',
             'extra' => [],
             ],
-           \ZMQ::MODE_SNDMORE
+           null
         ];
 
         $handler = new ZMQHandler($publisher, \ZMQ::MODE_SNDMORE, true);

@@ -1,4 +1,4 @@
-#MonologZMQHandler (v0.1.7)
+#MonologZMQHandler (v0.2.0)
 This package lets u send your Monolog logs over a ZeroMQ (ØMQ) socket.
 
 [![Build Status](https://api.travis-ci.org/websoftwares/MonologZMQHandler.png)](https://travis-ci.org/websoftwares/MonologZMQHandler)
@@ -25,7 +25,7 @@ Create a composer.json file in your project root:
 ```php
 {
     "require": {
-		"websoftwares/monolog-zmq-handler": "dev-master"
+		"websoftwares/monolog-zmq-handler": ~2.0"
     }
 }
 ```
@@ -48,9 +48,11 @@ $publisher = new \ZMQSocket($context, ZMQ::SOCKET_PUB);
 $publisher->bind("tcp://*:5556");
 
 // Create new handler class instance
-// This wil make the first message the log channel.
+// First argument is an instance of \ZMQSocket type PUSH OR PUB
+// Second argument \ZMQ::MODE_*
+// Thirth argument set to true wil make the first message the log channel. (multipart)
 // Default operation is \ZMQ::MODE_DONTWAIT
-$handler = new ZMQHandler($publisher, \ZMQ::MODE_SNDMORE); 
+$handler = new ZMQHandler($publisher, \ZMQ::MODE_SNDMORE, true); 
 
 // Create new logger instance
 $log = new Logger('channelName');
@@ -73,6 +75,11 @@ PUSH/PULL
 php pusher.php
 php puller.php
 ```
+
+## Changelog
+
+- v0.2.0: Allowing multiple \ZMQ::MODE_* options thx for @reenl pointing this out.
+- v0.1.0: Initial 
 
 ## Testing
 In the tests folder u can find several tests.

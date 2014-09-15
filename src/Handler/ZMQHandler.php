@@ -64,8 +64,10 @@ class ZMQHandler extends AbstractProcessingHandler
     {
         if ($this->multipart) {
             $this->zmqSocket->send($record['channel'],$this->zmqMode);
+            $this->zmqSocket->send($record['formatted']);
+        } else {
+            $this->zmqSocket->send($record["formatted"],$this->zmqMode);
         }
-        $this->zmqSocket->send($record["formatted"],$this->zmqMode);
     }
 
     /**
